@@ -32,6 +32,7 @@ public class PopupManager : MonoBehaviour
 
     public int PopupsShown { get; private set; }
     public event Action<int> OnPopupCountChanged;
+    public event Action<int> OnPopupClosed;
 
     private int nextPopupIndex = 0;
     private AudioSource audioSource;
@@ -155,6 +156,7 @@ public class PopupManager : MonoBehaviour
 
         lastCloseFrame = Time.frameCount;
         SetGameplayPaused(false);
+        OnPopupClosed?.Invoke(PopupsShown);
     }
 
     private void SetGameplayPaused(bool paused)

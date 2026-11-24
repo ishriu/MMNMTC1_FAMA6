@@ -11737,6 +11737,7 @@ GameObject:
   - component: {fileID: 1586979223}
   - component: {fileID: 1586979227}
   - component: {fileID: 1586979228}
+  - component: {fileID: 1586979229}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -11744,6 +11745,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1586979229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586979222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4a9c2e56b7d4103cd5f9b4e1a6c8375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupsToWin: 10
+  startMenuSceneName: StartMenu
+  winScreenTexture: {fileID: 0}
+  loseScreenTexture: {fileID: 0}
+  uiFont: {fileID: 0}
 --- !u!114 &1586979228
 MonoBehaviour:
   m_ObjectHideFlags: 0

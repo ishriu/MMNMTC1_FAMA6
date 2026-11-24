@@ -18,7 +18,7 @@ public class shootBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PopupManager.IsInputBlocked)
+        if (PopupManager.IsInputBlocked || GameStateManager.IsGameEnded)
         {
             return;
         }
