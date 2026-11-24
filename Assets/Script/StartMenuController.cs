@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
+using UnityEditor.SceneManagement;
 #endif
 
 public class StartMenuController : MonoBehaviour
@@ -435,12 +436,15 @@ public class StartMenuController : MonoBehaviour
         }
     }
 
+    private const string PlayFromStartMenuPrefKey = "AlwaysStartFromStartMenu";
+    private const string StartMenuScenePath = "Assets/Scenes/StartMenu.unity";
+
     [InitializeOnLoadMethod]
     private static void EnsureBuildSettingsScenes()
     {
         EditorApplication.delayCall += () =>
         {
-            string[] requiredPaths = { "Assets/Scenes/StartMenu.unity", "Assets/MIDTERMS.unity" };
+            string[] requiredPaths = { StartMenuScenePath, "Assets/MIDTERMS.unity" };
             var current = new List<EditorBuildSettingsScene>(EditorBuildSettings.scenes);
             bool changed = false;
 
@@ -477,7 +481,32 @@ public class StartMenuController : MonoBehaviour
             {
                 EditorBuildSettings.scenes = current.ToArray();
             }
+
+            ApplyPlayModeStartScene();
         };
+    }
+
+    private static void ApplyPlayModeStartScene()
+    {
+        bool enabled = EditorPrefs.GetBool(PlayFromStartMenuPrefKey, true);
+        EditorSceneManager.playModeStartScene = enabled
+            ? AssetDatabase.LoadAssetAtPath<SceneAsset>(StartMenuScenePath)
+            : null;
+    }
+
+    [MenuItem("Tools/Always Start From StartMenu")]
+    private static void TogglePlayFromStartMenu()
+    {
+        bool next = !EditorPrefs.GetBool(PlayFromStartMenuPrefKey, true);
+        EditorPrefs.SetBool(PlayFromStartMenuPrefKey, next);
+        ApplyPlayModeStartScene();
+    }
+
+    [MenuItem("Tools/Always Start From StartMenu", true)]
+    private static bool TogglePlayFromStartMenuValidate()
+    {
+        Menu.SetChecked("Tools/Always Start From StartMenu", EditorPrefs.GetBool(PlayFromStartMenuPrefKey, true));
+        return true;
     }
 #endif
 }
