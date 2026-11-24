@@ -18,6 +18,11 @@ public class shootBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PopupManager.IsInputBlocked)
+        {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Instantiate(myBullet, bulletPosition.position, bulletPosition.rotation);

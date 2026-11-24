@@ -23,11 +23,17 @@ public class collectItems : MonoBehaviour
     {
         if (collectibles.gameObject.tag=="kolek")
         {
+            collectibles.gameObject.tag = "Untagged";
             Destroy(collectibles.gameObject);
 
             kolekCollected++;
 
             numberText.text = kolekCollected.ToString();
+
+            if (PopupManager.Instance != null)
+            {
+                PopupManager.Instance.ShowNextPopup();
+            }
         }
     }
 }
