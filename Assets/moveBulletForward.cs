@@ -9,20 +9,24 @@ public class moveBulletForward : MonoBehaviour
     void Start()
     {
         mySphereRigid = GetComponent<Rigidbody>();
+        Destroy(gameObject, .5f);
     }
 
     // Update is called once per frame
     void Update()
     {
         mySphereRigid.AddForce(transform.forward * 30);
-
-        Destroy(gameObject, .5f);
     }
 
     void OnCollisionEnter(Collision col)
     {
       if(col.gameObject.tag == "Enemy")
         {
+            col.gameObject.tag = "Untagged";
+            if (KillCounter.Instance != null)
+            {
+                KillCounter.Instance.AddKill();
+            }
             Destroy(col.gameObject);
             Destroy(gameObject);
         }
