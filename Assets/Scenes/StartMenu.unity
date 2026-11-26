@@ -334,7 +334,7 @@ MonoBehaviour:
   menuBgm: {fileID: 0}
   menuBgmVolume: 0.5
   creditsText: "CLOSER TO MEMORY\n\nCredits coming soon."
-  howToPlayText: "CONTROLS\nWASD \u2014 Move\nShift \u2014 Run   |   Ctrl \u2014 Crouch   |   Space \u2014 Jump\nMouse \u2014 Look Around\nLeft Click \u2014 Shoot\nSpace / E / Esc \u2014 Close Pop-up\n\nOBJECTIVE\nExplore the rooms, collect 10 glowing items to uncover\n\"Did You Know?\" facts, and avoid colliding with enemies."
+  howToPlayText: "CONTROLS\nWASD \u2014 Move\nShift \u2014 Run   |   Ctrl \u2014 Crouch   |   Space \u2014 Jump\nMouse \u2014 Look Around\nLeft Click \u2014 Shoot\nSpace / E / Esc \u2014 Close Pop-up\n\nOBJECTIVE\nKill 20 enemies, collect 15 glowing items, and view\n10 \"Did You Know?\" pop-ups without dying to win."
 --- !u!1 &300001
 GameObject:
   m_ObjectHideFlags: 0

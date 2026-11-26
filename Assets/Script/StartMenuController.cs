@@ -33,8 +33,8 @@ public class StartMenuController : MonoBehaviour
         "Left Click — Shoot\n" +
         "Space / E / Esc — Close Pop-up\n\n" +
         "OBJECTIVE\n" +
-        "Explore the rooms, collect 10 glowing items to uncover\n" +
-        "\"Did You Know?\" facts, and avoid colliding with enemies.";
+        "Kill 20 enemies, collect 15 glowing items, and view\n" +
+        "10 \"Did You Know?\" pop-ups without dying to win.";
 
     private GameObject settingsPanel;
     private GameObject creditsPanel;

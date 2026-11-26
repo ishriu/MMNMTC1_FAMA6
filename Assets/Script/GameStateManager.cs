@@ -12,6 +12,8 @@ public class GameStateManager : MonoBehaviour
     public static bool IsGameEnded { get; private set; }
 
     [Header("Win Condition")]
+    public int killsToWin = 20;
+    public int collectiblesToWin = 15;
     public int popupsToWin = 10;
 
     [Header("Scene Navigation")]
@@ -53,9 +55,19 @@ public class GameStateManager : MonoBehaviour
             PlayerHealth.Instance.OnPlayerDied += TriggerLose;
         }
 
+        if (KillCounter.Instance != null)
+        {
+            KillCounter.Instance.OnKillCountChanged += HandleProgressChanged;
+        }
+
+        if (collectItems.Instance != null)
+        {
+            collectItems.Instance.OnCollectibleCountChanged += HandleProgressChanged;
+        }
+
         if (PopupManager.Instance != null)
         {
-            PopupManager.Instance.OnPopupClosed += HandlePopupClosed;
+            PopupManager.Instance.OnPopupClosed += HandleProgressChanged;
         }
     }
 
@@ -66,9 +78,19 @@ public class GameStateManager : MonoBehaviour
             PlayerHealth.Instance.OnPlayerDied -= TriggerLose;
         }
 
+        if (KillCounter.Instance != null)
+        {
+            KillCounter.Instance.OnKillCountChanged -= HandleProgressChanged;
+        }
+
+        if (collectItems.Instance != null)
+        {
+            collectItems.Instance.OnCollectibleCountChanged -= HandleProgressChanged;
+        }
+
         if (PopupManager.Instance != null)
         {
-            PopupManager.Instance.OnPopupClosed -= HandlePopupClosed;
+            PopupManager.Instance.OnPopupClosed -= HandleProgressChanged;
         }
 
         if (Instance == this)
@@ -82,9 +104,23 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    private void HandlePopupClosed(int totalPopupsShown)
+    private void HandleProgressChanged(int _)
     {
-        if (!IsGameEnded && totalPopupsShown >= popupsToWin)
+        CheckWinCondition();
+    }
+
+    private void CheckWinCondition()
+    {
+        if (IsGameEnded || PopupManager.IsPopupOpen)
+        {
+            return;
+        }
+
+        int kills = KillCounter.Instance != null ? KillCounter.Instance.KillCount : 0;
+        int collectibles = collectItems.Instance != null ? collectItems.Instance.CollectiblesCount : 0;
+        int popups = PopupManager.Instance != null ? PopupManager.Instance.PopupsShown : 0;
+
+        if (kills >= killsToWin && collectibles >= collectiblesToWin && popups >= popupsToWin)
         {
             TriggerWin();
         }

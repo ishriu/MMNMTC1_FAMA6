@@ -11772,6 +11772,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a9c2e56b7d4103cd5f9b4e1a6c8375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killsToWin: 20
+  collectiblesToWin: 15
   popupsToWin: 10
   startMenuSceneName: StartMenu
   winScreenTexture: {fileID: 0}
